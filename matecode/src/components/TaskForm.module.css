@@ -1,0 +1,124 @@
+.container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    padding: 20px;
+}
+
+.formTitle {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.fieldGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.input,
+.textarea,
+.select {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    padding: 9px 12px;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.textarea {
+    resize: vertical;
+}
+
+.select {
+    cursor: pointer;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--error);
+    border-radius: var(--radius-sm);
+    color: var(--error);
+    font-size: 13px;
+    padding: 8px 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancelButton {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 14px;
+    padding: 8px 16px;
+    transition: var(--transition);
+}
+
+.cancelButton:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.submitButton {
+    background-color: var(--accent);
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: var(--transition);
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+
+.submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Tablet (768px) */
+@media (min-width: 768px) {
+    .row {
+        flex-direction: row;
+    }
+}

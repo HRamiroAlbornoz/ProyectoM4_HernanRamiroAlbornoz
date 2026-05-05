@@ -1,0 +1,18 @@
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estado vacío */
+.empty {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 48px 16px;
+}
+
+.emptyText {
+    color: var(--text-secondary);
+    font-size: 15px;
+    text-align: center;
+}
