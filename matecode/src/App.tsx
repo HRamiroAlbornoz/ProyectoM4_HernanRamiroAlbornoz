@@ -3,6 +3,8 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './features/auth/AuthContext'
+import { ProtectedRoute } from './routes/ProtectedRoute'
+import { PublicRoute } from './routes/PublicRoute'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { TasksPage } from './pages/TasksPage'
@@ -17,12 +19,15 @@ function App() {
           {/* Ruta raíz: redirige al login */}
           <Route path="/" element={<Navigate to="/login" replace />} />
 
-          {/* Rutas públicas */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {/* Rutas públicas: solo accesibles sin sesión activa */}
+          <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
 
-          {/* Ruta protegida (la protección la agregamos en el Hito 4) */}
-          <Route path="/tasks" element={<TasksPage />} />
+          {/* Ruta protegida: solo accesible con sesión activa */}
+          <Route path="/tasks" element={<ProtectedRoute><TasksPage /></ProtectedRoute>} />
+
+          {/* Cualquier ruta desconocida redirige al login */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
