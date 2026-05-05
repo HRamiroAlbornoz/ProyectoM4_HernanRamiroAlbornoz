@@ -1,0 +1,74 @@
+/* Importamos la fuente Inter desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ─── Variables de diseño (tema oscuro por defecto) ─── */
+:root {
+    --bg-primary: #0F1117;
+    --bg-secondary: #1A1D27;
+    --bg-tertiary: #252836;
+    --accent: #7C3AED;
+    --accent-hover: #6D28D9;
+    --accent-light: rgba(124, 58, 237, 0.1);
+    --text-primary: #E2E8F0;
+    --text-secondary: #94A3B8;
+    --border: #2D3748;
+    --success: #10B981;
+    --error: #EF4444;
+    --warning: #F59E0B;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --radius: 8px;
+    --radius-sm: 6px;
+    --transition: all 0.2s ease;
+}
+
+/* ─── Tema claro (se activa según preferencia del sistema) ─── */
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-primary: #F8F9FA;
+        --bg-secondary: #FFFFFF;
+        --bg-tertiary: #F1F5F9;
+        --text-primary: #1A202C;
+        --text-secondary: #64748B;
+        --border: #E2E8F0;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* ─── Reset y estilos base ─── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+}
+
+input,
+textarea {
+    font-family: inherit;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
