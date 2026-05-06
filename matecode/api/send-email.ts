@@ -4,7 +4,7 @@
 
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import type { Task } from '../src/types/task'
+import type { Task } from '../src/types/task.js'
 
 // Inicializamos el cliente de AWS SES con las credenciales
 // que están en las variables de entorno del servidor
