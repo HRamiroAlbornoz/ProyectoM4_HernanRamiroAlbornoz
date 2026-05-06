@@ -59,3 +59,5 @@ _Pendiente de deploy en Vercel_
 ## Uso de IA en el desarrollo
 
 _Se completará al finalizar el proyecto_
+
+## Contribuciones
