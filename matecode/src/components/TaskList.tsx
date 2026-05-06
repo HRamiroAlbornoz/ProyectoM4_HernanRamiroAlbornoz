@@ -6,6 +6,7 @@ import {
     closestCenter,
     KeyboardSensor,
     PointerSensor,
+    TouchSensor,
     useSensor,
     useSensors,
 } from '@dnd-kit/core'
@@ -51,8 +52,21 @@ export function TaskList({
     })
 
     // Sensores de dnd-kit: permite arrastrar con mouse/touch y con teclado
+    // - delay: esperá 250ms antes de activar el drag (distingue tap de arrastre)
+    // - tolerance: permitir 5px de movimiento antes de cancelar
     const sensors = useSensors(
-        useSensor(PointerSensor),
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
+        }),
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
+        }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
         })
