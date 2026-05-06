@@ -161,19 +161,21 @@ incluyendo título y descripción de cada una.
 
 ## Testing
 
-El proyecto incluye 26 tests organizados en 4 archivos:
+El proyecto incluye 30 tests organizados en 5 archivos:
 
 ```bash
 npm run test -- --run
 ```
 
-- `tests/utils/firebaseErrors.test.ts` → Tests unitarios del traductor de errores
+- `tests/utils/firebaseErrors.test.ts` → Tests unitarios del traductor de errores de Firebase
 - `tests/utils/dateHelpers.test.ts` → Tests unitarios de funciones de fechas
-- `tests/components/TaskForm.test.tsx` → Tests del formulario de tareas
-- `tests/components/TaskCard.test.tsx` → Tests de la tarjeta de tarea
+- `tests/components/TaskForm.test.tsx` → Tests del formulario de tareas (crear, editar, validación)
+- `tests/components/TaskCard.test.tsx` → Tests de la tarjeta de tarea (toggle, eliminar, prioridad)
+- `tests/services/emailService.test.ts` → Tests del servicio de email incluyendo caso de error del serverless
 
-Los servicios externos (Firebase, dnd-kit) están mockeados para que
-los tests no realicen llamadas reales.
+Los servicios externos (Firebase, dnd-kit, fetch) están mockeados para que
+los tests no realicen llamadas reales. Se cubren casos borde como título vacío,
+confirmación de eliminación, error del serverless y respuesta exitosa del email.
 
 ## Limitaciones conocidas
 
