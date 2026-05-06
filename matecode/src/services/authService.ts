@@ -5,7 +5,7 @@
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    signInWithPopup,
+    signInWithRedirect,
     GoogleAuthProvider,
     signOut,
 } from 'firebase/auth'
@@ -24,9 +24,9 @@ export async function loginWithEmail(email: string, password: string) {
     return signInWithEmailAndPassword(auth, email, password)
 }
 
-// Inicia sesión con la cuenta de Google (abre un popup)
+// Inicia sesión con la cuenta de Google
 export async function loginWithGoogle() {
-    return signInWithPopup(auth, googleProvider)
+    return signInWithRedirect(auth, googleProvider)
 }
 
 // Cierra la sesión del usuario actual

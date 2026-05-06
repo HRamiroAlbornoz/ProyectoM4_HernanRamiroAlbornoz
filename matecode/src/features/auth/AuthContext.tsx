@@ -2,7 +2,7 @@
 // En este caso, compartimos el usuario autenticado con toda la app.
 
 import { createContext, useEffect, useState } from 'react'
-import { onAuthStateChanged, type User } from 'firebase/auth'
+import { onAuthStateChanged, getRedirectResult, type User } from 'firebase/auth'
 import { auth } from '../../services/firebase'
 
 // Definimos qué datos va a tener el contexto
@@ -24,6 +24,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        // Verificamos si hay un resultado pendiente del redirect de Google
+        getRedirectResult(auth).catch((error) => {
+            console.error('Error en redirect de Google:', error)
+        })
+
         // onAuthStateChanged escucha automáticamente cuando el usuario
         // inicia sesión, cierra sesión, o recarga la página.
         // Esto es lo que hace que la sesión sea persistente.

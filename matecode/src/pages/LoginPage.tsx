@@ -44,9 +44,6 @@ export function LoginPage() {
             await loginWithGoogle()
             navigate('/tasks')
         } catch (err: unknown) {
-            // 👇 Agregamos esto temporalmente para ver el error exacto
-            console.log('Error completo:', err)
-            console.log('Código de error:', (err as { code?: string }).code)
             const code = (err as { code?: string }).code ?? ''
             setError(getAuthErrorMessage(code))
         } finally {
