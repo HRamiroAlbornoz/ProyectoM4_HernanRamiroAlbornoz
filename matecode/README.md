@@ -177,11 +177,11 @@ los tests no realicen llamadas reales.
 
 ## Limitaciones conocidas
 
-El login con Google presenta limitaciones en producción con dominios de Vercel
-debido a restricciones de seguridad entre dominios (política de mismo origen).
-Firebase Auth requiere Firebase Hosting para que `signInWithRedirect` funcione
-correctamente con dominios personalizados. El login con **email y contraseña
-funciona correctamente** en producción.
+El login con Google en producción requiere configurar el `authDomain` de Firebase
+para que apunte al dominio de Vercel, junto con un proxy en `vercel.json` que
+redirige las llamadas de `/__/auth/handler` al handler de Firebase. Esta configuración
+evita conflictos de cross-origin entre `vercel.app` y `firebaseapp.com`.
+Sin esta configuración, el login con Google funciona correctamente en desarrollo pero falla en producción.
 
 ## Uso de IA en el desarrollo
 
