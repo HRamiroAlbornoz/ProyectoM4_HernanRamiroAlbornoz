@@ -8,6 +8,7 @@ import { useTasks } from '../hooks/useTasks'
 import { TaskForm } from '../components/TaskForm'
 import { TaskList } from '../components/TaskList'
 import { logout } from '../services/authService'
+import { sendTaskSummary } from '../services/emailService'
 import type { TaskFormValues } from '../types/task'
 import styles from './TasksPage.module.css'
 
@@ -21,6 +22,8 @@ export function TasksPage() {
 
     const [showForm, setShowForm] = useState(false)
     const [filter, setFilter] = useState<Filter>('all')
+    const [emailLoading, setEmailLoading] = useState(false)
+    const [emailStatus, setEmailStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
     async function handleLogout() {
         await logout()
@@ -30,6 +33,26 @@ export function TasksPage() {
     async function handleAddTask(values: TaskFormValues) {
         await addTask(values)
         setShowForm(false)
+    }
+
+    async function handleSendEmail() {
+        if (!user?.email) return
+        setEmailLoading(true)
+        setEmailStatus('idle')
+
+        try {
+            await sendTaskSummary(user.email, tasks)
+            setEmailStatus('success')
+
+            // Volvemos al estado normal después de 3 segundos
+            setTimeout(() => setEmailStatus('idle'), 3000)
+        } catch (error) {
+            console.error(error)
+            setEmailStatus('error')
+            setTimeout(() => setEmailStatus('idle'), 3000)
+        } finally {
+            setEmailLoading(false)
+        }
     }
 
     // Contadores para las estadísticas
@@ -95,9 +118,21 @@ export function TasksPage() {
 
                     {/* Botones de acción */}
                     <div className={styles.rightActions}>
-                        {/* Botón de email (se conectará en el Hito 7) */}
-                        <button className={styles.emailButton} disabled title="Disponible próximamente">
-                            📧 Enviar resumen
+                        {/* Botón de email */}
+                        <button
+                            className={styles.emailButton}
+                            onClick={handleSendEmail}
+                            disabled={emailLoading || tasks.length === 0}
+                            aria-busy={emailLoading}
+                            title={tasks.length === 0 ? 'No hay tareas para enviar' : 'Enviar resumen por email'}
+                        >
+                            {emailLoading
+                                ? '⏳ Enviando...'
+                                : emailStatus === 'success'
+                                    ? '✅ ¡Enviado!'
+                                    : emailStatus === 'error'
+                                        ? '❌ Error'
+                                        : '📧 Enviar resumen'}
                         </button>
 
                         {/* Botón nueva tarea */}
