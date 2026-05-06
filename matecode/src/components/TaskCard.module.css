@@ -7,6 +7,7 @@
     margin-bottom: 10px;
     padding: 14px;
     transition: var(--transition);
+    touch-action: none;
 }
 
 .card:hover {
@@ -33,6 +34,7 @@
     font-size: 20px;
     padding: 0 4px;
     user-select: none;
+    touch-action: none;
 }
 
 .dragHandle:active {
